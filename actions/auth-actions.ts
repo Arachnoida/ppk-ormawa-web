@@ -5,9 +5,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function loginAction(formData: FormData) {
-  const supabase = await createClient(); // Await karena fix Next.js 15 tadi
+  const supabase = await createClient();
 
-  // Ambil data dari form HTML
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
@@ -18,11 +17,10 @@ export async function loginAction(formData: FormData) {
   });
 
   if (error) {
-    // Jika gagal, kembalikan pesan error ke frontend
     return { errorMessage: error.message };
   }
 
-  // Jika berhasil, refresh cache dan redirect
+  // Jika sukses, refresh data dan arahkan ke dashboard
   revalidatePath("/", "layout");
   redirect("/dashboard");
 }

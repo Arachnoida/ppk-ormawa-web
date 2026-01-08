@@ -123,3 +123,99 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Styling Khusus Konten Artikel Quill */
+.ql-editor img {
+  max-width: 100%; /* Gambar tidak akan melebihi lebar layar */
+  height: auto; /* Rasio aspek tetap terjaga */
+  border-radius: 8px; /* Sedikit lengkungan biar estetik */
+  margin: 20px auto; /* Beri jarak atas-bawah dan tengah */
+  display: block;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.ql-editor {
+  font-family: "Inter", sans-serif; /* Default font */
+}
+
+/* Mengaktifkan Font Serif (Times New Roman) jika dipilih di editor */
+.ql-font-serif {
+  font-family: "Times New Roman", Times, serif !important;
+}
+
+/* FIX JARAK ENTER (PARAGRAF) */
+.ql-editor p {
+  margin-bottom: 1.25em !important; /* Memberi jarak 1x Enter antar paragraf */
+  line-height: 1.8 !important; /* Jarak antar baris agar lebih lega dibaca */
+}
+
+/* FIX LIST (Agar angka/bullet point tidak nempel ke teks) */
+.ql-editor ol,
+.ql-editor ul {
+  padding-left: 1.5em !important;
+  margin-bottom: 1.25em !important;
+}
+
+.ql-editor li {
+  margin-bottom: 0.5em;
+}
+
+/* 1. Heading 1 (Judul Besar) -> 16px */
+.ql-editor h1 {
+  font-size: 16px !important;
+  font-weight: bold;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  line-height: 1.4;
+}
+
+/* 2. Heading 2 (Sub Judul) -> 14px */
+.ql-editor h2 {
+  font-size: 14px !important;
+  font-weight: bold;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  line-height: 1.4;
+}
+
+/* 3. Paragraph (Normal) -> 12px */
+.ql-editor p {
+  font-size: 12px !important;
+  margin-bottom: 1em !important;
+  line-height: 1.6 !important;
+}
+
+/* 4. Ukuran 'Small' (Untuk Source/Keterangan) -> 9px */
+.ql-editor .ql-size-small {
+  font-size: 9px !important;
+  color: #64748b; /* Abu-abu biar kelihatan beda */
+  font-style: italic; /* Miring biar estetik */
+}
+
+/* Hapus indentasi default browser untuk list agar rapi di font kecil */
+.ql-editor ul,
+.ql-editor ol {
+  padding-left: 1.5em;
+}
+.ql-editor li {
+  font-size: 12px !important; /* List juga ikut 12px */
+}
+
+/* --- FIX LABEL TOOLBAR QUILL --- */
+
+/* 1. Menampilkan teks "Normal" saat tidak ada ukuran yang dipilih */
+.ql-snow .ql-picker.ql-size .ql-picker-label:not([data-value])::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item:not([data-value])::before {
+  content: "Normal" !important;
+}
+
+/* 2. Menampilkan teks "Small" (Opsional: Bisa diganti jadi "Kecil" atau "Source") */
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="small"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="small"]::before {
+  content: "Small (9px)" !important;
+}
+
+/* 3. Merapikan lebar dropdown agar tulisan tidak terpotong */
+.ql-snow .ql-picker.ql-size {
+  width: 100px !important;
+}
