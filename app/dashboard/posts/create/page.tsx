@@ -16,15 +16,15 @@ import { createPost } from "@/actions/post-actions";
 import { Loader2 } from "lucide-react";
 import "react-quill-new/dist/quill.snow.css";
 
+// Import CSS tambahan agar Editor terlihat lega
+import "@/app/globals.css";
+
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
-// 1. TAMBAHKAN CONFIG MODULES DISINI (SAMA PERSIS DENGAN HALAMAN EDIT)
 const modules = {
   toolbar: [
-    [{ header: [1, 2, false] }], // Hanya H1, H2, dan Normal
-    [{ size: ["small", false] }], // Hanya 'Small' (untuk Source) dan 'Normal'
-    ["bold", "italic", "underline"], // Hapus strike jika tidak perlu
-    [{ color: [] }, { background: [] }],
+    [{ header: [1, 2, 3, false] }], // Tambahkan H3 juga biar lengkap
+    ["bold", "italic", "underline", "blockquote"], // Tambahkan blockquote
     [{ list: "ordered" }, { list: "bullet" }],
     [{ align: [] }],
     ["link", "image"],
@@ -48,17 +48,23 @@ export default function CreatePostPage() {
     if (res?.error) {
       alert(res.error);
       setLoading(false);
+    } else {
+      // Redirect atau reset form jika sukses (opsional)
+      alert("Artikel berhasil dibuat!");
+      setLoading(false);
     }
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 pb-10">
+    <div className="max-w-4xl mx-auto space-y-6 pb-20">
       {" "}
-      {/* Ubah max-w-2xl jadi 4xl biar lega */}
+      {/* Tambah padding bawah */}
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold">Tulis Artikel Baru</h2>
       </div>
       <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg border shadow-sm">
+        {/* ... INPUT JUDUL, KATEGORI, THUMBNAIL (SAMA SEPERTI SEBELUMNYA) ... */}
+
         <div className="space-y-2">
           <Label htmlFor="title">Judul Artikel</Label>
           <Input
@@ -83,31 +89,36 @@ export default function CreatePostPage() {
               </SelectContent>
             </Select>
           </div>
-
           <div className="space-y-2">
-            <Label htmlFor="thumbnail">Thumbnail (Gambar Cover)</Label>
+            <Label htmlFor="thumbnail">Thumbnail</Label>
             <Input id="thumbnail" name="thumbnail" type="file" accept="image/*" />
           </div>
         </div>
 
         <div className="space-y-2">
           <Label>Isi Artikel</Label>
-          <div className="h-96 mb-12">
+          <div className="h-[500px] mb-12">
             {" "}
-            {/* Tinggi diperbesar jadi h-96 */}
+            {/* Tinggi editor diperbesar */}
             <ReactQuill
               theme="snow"
               value={content}
               onChange={setContent}
-              modules={modules} // 2. JANGAN LUPA PASANG PROPS INI
+              modules={modules}
               className="h-full"
             />
           </div>
         </div>
 
-        <div className="pt-8">
-          <Button type="submit" disabled={loading} className="w-full">
-            {loading ? <Loader2 className="animate-spin mr-2" /> : "Simpan sebagai Draft"}
+        <div className="pt-12">
+          {" "}
+          {/* Tambah padding top agar tombol tidak ketabrak */}
+          <Button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-slate-900 hover:bg-slate-800"
+          >
+            {loading ? <Loader2 className="animate-spin mr-2" /> : "Simpan & Publikasikan"}
           </Button>
         </div>
       </form>

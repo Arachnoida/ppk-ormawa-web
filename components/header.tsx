@@ -12,7 +12,9 @@ export function Header({ user }: { user?: { full_name: any; role: any } | null }
           <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
             Dashboard
           </span>
-          <h1 className="text-sm font-semibold text-slate-800">Sistem Informasi Manajemen</h1>
+          <h1 className="text-sm font-semibold text-slate-800">
+            Sistem Informasi PPK ORMAWA KSR-PMI Universitas Udayana
+          </h1>
         </div>
       </div>
 

@@ -124,98 +124,124 @@
   }
 }
 
-/* Styling Khusus Konten Artikel Quill */
-.ql-editor img {
-  max-width: 100%; /* Gambar tidak akan melebihi lebar layar */
-  height: auto; /* Rasio aspek tetap terjaga */
-  border-radius: 8px; /* Sedikit lengkungan biar estetik */
-  margin: 20px auto; /* Beri jarak atas-bawah dan tengah */
-  display: block;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+html {
+  scroll-behavior: smooth;
 }
 
+/* =========================================
+   STYLE EDITOR QUILL (CLEAN & MODERN VERSION)
+   ========================================= */
+
+/* 1. CONTAINER EDITOR */
 .ql-editor {
-  font-family: "Inter", sans-serif; /* Default font */
+  font-family: "Inter", sans-serif;
+  font-size: 16px !important; /* Ukuran Font Normal (Enak dibaca) */
+  line-height: 1.75 !important; /* Jarak antar baris (Lega) */
+  min-height: 300px; /* Tinggi minimal area ketik */
+  color: #334155; /* Warna teks slate-700 (tidak hitam pekat agar mata nyaman) */
 }
 
-/* Mengaktifkan Font Serif (Times New Roman) jika dipilih di editor */
-.ql-font-serif {
-  font-family: "Times New Roman", Times, serif !important;
+/* 2. HEADING (JUDUL DALAM ARTIKEL) */
+.ql-editor h1 {
+  font-size: 2.25em !important; /* Setara 36px (Sangat Besar) */
+  font-weight: 800 !important;
+  margin-top: 1.5em !important; /* Jarak dari paragraf atasnya */
+  margin-bottom: 0.75em !important;
+  line-height: 1.2 !important;
+  color: #0f172a; /* Warna slate-900 (Gelap) */
 }
 
-/* FIX JARAK ENTER (PARAGRAF) */
+.ql-editor h2 {
+  font-size: 1.75em !important; /* Setara 28px (Besar) */
+  font-weight: 700 !important;
+  margin-top: 1.5em !important;
+  margin-bottom: 0.5em !important;
+  line-height: 1.3 !important;
+  color: #1e293b; /* Warna slate-800 */
+}
+
+.ql-editor h3 {
+  font-size: 1.5em !important; /* Setara 24px */
+  font-weight: 600 !important;
+  margin-top: 1.25em !important;
+  margin-bottom: 0.5em !important;
+  color: #334155;
+}
+
+/* 3. PARAGRAF */
 .ql-editor p {
-  margin-bottom: 1.25em !important; /* Memberi jarak 1x Enter antar paragraf */
-  line-height: 1.8 !important; /* Jarak antar baris agar lebih lega dibaca */
+  margin-bottom: 1.5em !important; /* Jarak antar paragraf (Enter) */
 }
 
-/* FIX LIST (Agar angka/bullet point tidak nempel ke teks) */
+/* 4. LIST (Bullet & Number) */
 .ql-editor ol,
 .ql-editor ul {
   padding-left: 1.5em !important;
-  margin-bottom: 1.25em !important;
+  margin-bottom: 1.5em !important;
 }
 
 .ql-editor li {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.5em !important; /* Jarak antar item list */
+  padding-left: 0.5em;
 }
 
-/* 1. Heading 1 (Judul Besar) -> 16px */
-.ql-editor h1 {
-  font-size: 16px !important;
-  font-weight: bold;
-  margin-top: 1em;
-  margin-bottom: 0.5em;
-  line-height: 1.4;
+/* 5. BLOCKQUOTE (Kutipan) */
+.ql-editor blockquote {
+  border-left: 4px solid #3b82f6; /* Garis biru di kiri */
+  padding-left: 1em;
+  font-style: italic;
+  color: #64748b;
+  background: #f8fafc;
+  padding: 1em;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 1.5em !important;
 }
 
-/* 2. Heading 2 (Sub Judul) -> 14px */
-.ql-editor h2 {
-  font-size: 14px !important;
-  font-weight: bold;
-  margin-top: 1em;
-  margin-bottom: 0.5em;
-  line-height: 1.4;
+/* 6. GAMBAR DALAM ARTIKEL */
+.ql-editor img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px; /* Sudut melengkung */
+  margin: 2em auto; /* Jarak atas bawah gambar */
+  display: block;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); /* Bayangan halus */
 }
 
-/* 3. Paragraph (Normal) -> 12px */
-.ql-editor p {
-  font-size: 12px !important;
-  margin-bottom: 1em !important;
-  line-height: 1.6 !important;
-}
-
-/* 4. Ukuran 'Small' (Untuk Source/Keterangan) -> 9px */
+/* 7. UKURAN KECIL (Small) - Biasa untuk caption/sumber */
 .ql-editor .ql-size-small {
-  font-size: 9px !important;
-  color: #64748b; /* Abu-abu biar kelihatan beda */
-  font-style: italic; /* Miring biar estetik */
+  font-size: 0.85em !important; /* Sekitar 13.5px */
+  color: #64748b;
 }
 
-/* Hapus indentasi default browser untuk list agar rapi di font kecil */
-.ql-editor ul,
-.ql-editor ol {
-  padding-left: 1.5em;
-}
-.ql-editor li {
-  font-size: 12px !important; /* List juga ikut 12px */
-}
-
-/* --- FIX LABEL TOOLBAR QUILL --- */
-
-/* 1. Menampilkan teks "Normal" saat tidak ada ukuran yang dipilih */
+/* --- FIX TOOLBAR LABELS (Agar Dropdown Rapi) --- */
 .ql-snow .ql-picker.ql-size .ql-picker-label:not([data-value])::before,
 .ql-snow .ql-picker.ql-size .ql-picker-item:not([data-value])::before {
   content: "Normal" !important;
 }
-
-/* 2. Menampilkan teks "Small" (Opsional: Bisa diganti jadi "Kecil" atau "Source") */
 .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="small"]::before,
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="small"]::before {
-  content: "Small (9px)" !important;
+  content: "Kecil" !important;
 }
-
-/* 3. Merapikan lebar dropdown agar tulisan tidak terpotong */
+.ql-snow .ql-picker.ql-header .ql-picker-label::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item::before {
+  /* Fix label heading agar tidak kosong */
+  content: attr(data-label) !important;
+}
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="1"]::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="1"]::before {
+  content: "Judul Besar (H1)" !important;
+}
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="2"]::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="2"]::before {
+  content: "Sub Judul (H2)" !important;
+}
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="3"]::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="3"]::before {
+  content: "Sub Bab (H3)" !important;
+}
 .ql-snow .ql-picker.ql-size {
-  width: 100px !important;
+  width: 110px !important;
+}
+.ql-snow .ql-picker.ql-header {
+  width: 140px !important;
 }
